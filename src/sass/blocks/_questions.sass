@@ -1,0 +1,30 @@
+.questions
+    padding: 100px 0 50px
+    &__wrapper
+        display: flex
+    &__content
+        width: 100%
+        margin-left: 47px
+        display: flex
+        flex-direction: column
+        gap: 10px
+    &__line
+        padding: 16px 13px
+        position: relative
+        background-color: #fff
+        box-shadow: 0px 4px 11px 0px rgba(196, 174, 151, 0.20)
+        &::after
+            content: ''
+            position: absolute
+            width: 16px
+            height: 16px
+            top: 17px
+            right: 26px
+            background: url('../images/icons/arrow.svg') center center/cover no-repeat
+    &__title
+        font-family: $yeseva
+        font-size: 16px
+        font-weight: 700
+        line-height: 18px
+    &__text
+        margin-top: 18px
