@@ -1,0 +1,25 @@
+@media (max-width: 769px) 
+    .about__image-box
+        width: 120px
+        &_big
+            width: 190px
+
+@media (max-width: 481px)
+    .about__wrapper
+        gap: 15px
+    .about__content
+        min-width: 171px
+    .about__image-descr
+        display: none
+    .about__image-box
+        width: 80px
+        &_big
+            width: 140px
+
+@media (max-width: 361px)
+    .about__wrapper
+        gap: 15px
+    .about__content
+        min-width: 233px
+    .about__image-box:not(:first-child)
+        display: none
