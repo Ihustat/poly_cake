@@ -1,6 +1,8 @@
 .header
     padding: 4px 0
     background-color: $main-bg
+    position: relative
+    overflow:  clip
     &__wrapper
         display: flex
         justify-content: space-between
@@ -27,3 +29,31 @@
         height: 20px
         left: 0
         bottom: 0
+
+.hamburger
+    display: none
+    width: 30px
+    cursor: pointer
+    &-box
+        position: relative
+    &-inner
+        top: 50%
+        margin-top: -2px
+        &::before
+            content: ""
+            top: -10px
+        &::after
+            content: ''
+            bottom: -10px
+        
+
+     
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after
+    display: block
+    width: 30px
+    height: 3px
+    background-color: $pink
+    border-radius: 4px
+    position: absolute
+
+
