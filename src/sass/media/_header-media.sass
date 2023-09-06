@@ -15,12 +15,19 @@
     .header__nav
         padding: 75px 46px
         position: absolute
+        z-index: 10
         right: -300%
         top: 0  
+        bottom: 0
         background-color: #7B6152
         color: #FFF8F3
-        transition: all .3s
+        transition: all .5s
+        height: 300px
+        &.header__nav_active
+            right: 0
     .hamburger
         position: relative
         display: block
-        z-index: 3
+        z-index: 15
+        
+

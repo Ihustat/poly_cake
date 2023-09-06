@@ -12,6 +12,8 @@ const avif          = require("gulp-avif");
 const webp          = require("gulp-webp"); 
 const imagemin      = require("gulp-imagemin"); 
 const newer         = require("gulp-newer"); 
+const jsonServer    = require('gulp-json-srv');
+const server        = jsonServer.create({port: 250});
 
 function images() {
     return src(['src/images/**/*.*', '!src/images/**/*.svg'])
@@ -25,7 +27,8 @@ function images() {
            .pipe(newer('dist/images'))
            .pipe(src('src/images/**/*.*'))
            .pipe(imagemin())
-           .pipe(dest('dist/images'));
+        //    .pipe(dest('dist/images'));
+           .pipe(dest('C:/openserver/domains/polyCake/images'));
 };
 
 
@@ -35,7 +38,8 @@ function styles() {
            .pipe(rename({suffix: '.min', prefix: ''}))
            .pipe(autoprefixer({overriderBrowserlist: ['last 10 version']}))
            .pipe(cleanCSS({compatibility: 'ie8'}))
-           .pipe(dest('dist/css'))
+           .pipe(dest('C:/openserver/domains/polyCake/css'))
+        //    .pipe(dest('dist/css'))
            .pipe(browserSync.stream());
 };
 
@@ -44,7 +48,8 @@ function scripts() {
     return src('src/js/**/*.js')
             .pipe(uglify())
             .pipe(rename({suffix: '.min', prefix: ''}))
-            .pipe(dest('dist/js'))
+            // .pipe(dest('dist/js'))
+            .pipe(dest('C:/openserver/domains/polyCake/js'))
             .pipe(browserSync.stream());
 };
 
@@ -53,7 +58,8 @@ function scripts() {
 function html() {
     return src("src/*.html")
            .pipe(htmlmin({ collapseWhitespace: true }))
-           .pipe(dest("dist/"));
+        //    .pipe(dest("dist/"));
+           .pipe(dest("C:/openserver/domains/polyCake/"));
 };
 
 
@@ -61,6 +67,12 @@ function fonts() {
     return src("src/fonts/**/*")
            .pipe(dest("dist/fonts"))
            .pipe(browserSync.stream());
+};
+
+function json() {
+    return src('src/js/db.json')
+            .pipe(dest('C:/openserver/domains/polyCake/js'))
+           .pipe(server.pipe());
 };
 
 function watching() {
@@ -74,7 +86,8 @@ function watching() {
 function browsersync() {
     browserSync.init({
         server: {
-            baseDir: 'dist/'
+            // baseDir: 'dist/'
+            baseDir: 'C:/openserver/domains/polyCake/'
         }
     });
 };
@@ -91,6 +104,7 @@ exports.fonts = fonts;
 exports.images = images;
 exports.watching = watching;
 exports.browsersync = browsersync;
+exports.json = json;
 exports.clean = clean;
 
-exports.default = parallel(html, fonts, styles, scripts, images, browsersync, watching);
+exports.default = parallel(html, fonts, styles, scripts, images, browsersync, json, watching);

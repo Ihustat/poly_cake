@@ -115,4 +115,67 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     rDots[0].click();
+
+    //hamburger menu
+
+    const hamburger = document.querySelector('.hamburger'),
+          menu = document.querySelector('.header__nav');
+        
+    hamburger.addEventListener('click', () => {
+        menu.classList.toggle('header__nav_active');
+        hamburger.classList.toggle('hamburger_active');
+    });
+
+    //form
+
+    const form = document.querySelector('.form'),
+          inputs = document.querySelectorAll('.form__input'),
+          btn = document.querySelector('.form__btn'),
+          response = {
+            succes: 'Мы вам перезвоним',
+            loading: 'Отправляем...',
+            fail: 'Что-то пошло не так'
+          };
+
+    async function sendData(url, data) {
+        const res = await fetch(url, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+
+        return await res.json();
+    };
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const responseBlock = document.createElement('div');
+        responseBlock.textContent = response.loading;
+        form.append(responseBlock);
+
+
+        const formData = new FormData(form);
+        const json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+        sendData('http://localhost:250/requests', json)
+        .then(() => {
+            responseBlock.textContent = response.succes;
+        })
+        .catch(() => {
+            responseBlock.textContent = response.fail;
+        })
+        .finally(() => {
+            setTimeout(() => {
+                responseBlock.remove();
+                inputs.forEach(input => {
+                    input.value = '';
+                });
+            }, 2000)
+        })
+    });
+
+
 });
