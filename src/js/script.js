@@ -191,13 +191,12 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
     <img src="${img}" alt="${alt}" class="flavor__card-img">
         `;
-        const flavorDescr = flavor.querySelector('.flavor__card-descr');
         lines.forEach(line => {
             const l = document.createElement('div');
             l.classList.add('flavor__card-line');
             l.textContent = `${line}`;
 
-            flavorDescr.append(l);
+            flavor.querySelector('.flavor__card-descr').append(l);
         });
 
         flavorWrapper.append(flavor);
@@ -218,6 +217,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+    //calc
 
+    const total = document.querySelector('.calc__total span'),
+          selects = document.querySelectorAll('.calc__select'),
+          input = document.querySelector('.kilos-input');
+
+    function changeValue() {
+    const values = [];
+
+        selects.forEach(select => { 
+
+        if (select.getAttribute('data-size')) {
+            if (select.value === 'kilos') {
+                input.style.display = 'block';
+                values.push(+input.value * 100);
+            } else {
+                input.style.display = 'none';
+            };
+        };
+
+        if (!(select.value === 'kilos')) {
+            values.push(+select.value);
+        };
+    });
     
+            total.textContent = values.reduce((sum, current) => sum + current);
+        };
+
+    selects.forEach(select => {
+        select.addEventListener('change', () => {
+            select.querySelector('option').setAttribute('disabled', 'disabled');
+
+            changeValue();
+        });
+    });
+
+    input.addEventListener('input', () => {
+        changeValue();
+    });
+    
+
 });
