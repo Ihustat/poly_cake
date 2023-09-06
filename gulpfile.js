@@ -27,8 +27,8 @@ function images() {
            .pipe(newer('dist/images'))
            .pipe(src('src/images/**/*.*'))
            .pipe(imagemin())
-        //    .pipe(dest('dist/images'));
-           .pipe(dest('C:/openserver/domains/polyCake/images'));
+           .pipe(dest('dist/images'));
+        //    .pipe(dest('C:/openserver/domains/polyCake/images'));
 };
 
 
@@ -38,8 +38,8 @@ function styles() {
            .pipe(rename({suffix: '.min', prefix: ''}))
            .pipe(autoprefixer({overriderBrowserlist: ['last 10 version']}))
            .pipe(cleanCSS({compatibility: 'ie8'}))
-           .pipe(dest('C:/openserver/domains/polyCake/css'))
-        //    .pipe(dest('dist/css'))
+        //    .pipe(dest('C:/openserver/domains/polyCake/css'))
+           .pipe(dest('dist/css'))
            .pipe(browserSync.stream());
 };
 
@@ -48,8 +48,8 @@ function scripts() {
     return src('src/js/**/*.js')
             .pipe(uglify())
             .pipe(rename({suffix: '.min', prefix: ''}))
-            // .pipe(dest('dist/js'))
-            .pipe(dest('C:/openserver/domains/polyCake/js'))
+            .pipe(dest('dist/js'))
+            // .pipe(dest('C:/openserver/domains/polyCake/js'))
             .pipe(browserSync.stream());
 };
 
@@ -58,8 +58,8 @@ function scripts() {
 function html() {
     return src("src/*.html")
            .pipe(htmlmin({ collapseWhitespace: true }))
-        //    .pipe(dest("dist/"));
-           .pipe(dest("C:/openserver/domains/polyCake/"));
+           .pipe(dest("dist/"));
+        //    .pipe(dest("C:/openserver/domains/polyCake/"));
 };
 
 
@@ -71,7 +71,8 @@ function fonts() {
 
 function json() {
     return src('src/js/db.json')
-            .pipe(dest('C:/openserver/domains/polyCake/js'))
+            .pipe(dest('dist/js'))
+            // .pipe(dest('C:/openserver/domains/polyCake/js'))
            .pipe(server.pipe());
 };
 
@@ -86,8 +87,8 @@ function watching() {
 function browsersync() {
     browserSync.init({
         server: {
-            // baseDir: 'dist/'
-            baseDir: 'C:/openserver/domains/polyCake/'
+            baseDir: 'dist/'
+            // baseDir: 'C:/openserver/domains/polyCake/'
         }
     });
 };
