@@ -130,12 +130,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const form = document.querySelector('.form'),
           inputs = document.querySelectorAll('.form__input'),
-          btn = document.querySelector('.form__btn'),
+          chekbox = document.querySelector('.form__checkbox'),
           response = {
             succes: 'Мы вам перезвоним',
             loading: 'Отправляем...',
             fail: 'Что-то пошло не так'
-          };
+          },
+          total = document.querySelector('.calc__total span'),
+          selects = document.querySelectorAll('.calc__select'),
+          calcInput = document.querySelector('.kilos-input');
 
     async function sendData(url, data) {
         const res = await fetch(url, {
@@ -156,12 +159,25 @@ document.addEventListener('DOMContentLoaded', () => {
         responseBlock.textContent = response.loading;
         form.append(responseBlock);
 
+        if (chekbox.checked) {
+            selects.forEach(select => {
+                select.setAttribute('form', 'data');
+            });
+            calcInput.setAttribute('form', 'data');
+        } else {
+            selects.forEach(select => {
+                select.setAttribute('form', '');
+            });
+            calcInput.setAttribute('form', '')
+        };
+
 
         const formData = new FormData(form);
         const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
         sendData('http://localhost:250/requests', json)
-        .then(() => {
+        .then((data) => {
+            console.log(data);
             responseBlock.textContent = response.succes;
         })
         .catch(() => {
@@ -219,10 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //calc
 
-    const total = document.querySelector('.calc__total span'),
-          selects = document.querySelectorAll('.calc__select'),
-          input = document.querySelector('.kilos-input');
-
     function changeValue() {
     const values = [];
 
@@ -230,19 +242,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (select.getAttribute('data-size')) {
             if (select.value === 'kilos') {
-                input.style.display = 'block';
-                values.push(+input.value * 100);
+                calcInput.style.display = 'block';
+                values.push(+calcInput.value * 100);
             } else {
-                input.style.display = 'none';
+                calcInput.style.display = 'none';
             };
         };
 
         if (!(select.value === 'kilos')) {
-            values.push(+select.value);
+            values.push(select.getAttribute('data-price'));
+            const vals = select.querySelectorAll('option')
+            vals.forEach(val => {
+                if (val.value === select.value) {
+                    values.push(+val.getAttribute('data-price'));
+                }
+            })
         };
     });
     
             total.textContent = values.reduce((sum, current) => sum + current);
+
+            document.querySelector('.total-input').value = `${total.textContent}`;
         };
 
     selects.forEach(select => {
@@ -253,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    input.addEventListener('input', () => {
+    calcInput.addEventListener('input', () => {
         changeValue();
     });
     

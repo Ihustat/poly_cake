@@ -208,23 +208,23 @@
                 <div class="calc__inner">
                     <select name="size"class="calc__select" data-size="true">
                         <option class="calc__option" value="0">Выберите размер</option>
-                        <option class="calc__option" value="10">Бенто</option>
+                        <option class="calc__option" data-price="10" value="Bento">Бенто</option>
                         <option class="calc__option" value="kilos">килограм
                         </option>
-                        <option class="calc__option"  value="30">Ярусный</option>
+                        <option class="calc__option" data-price="20" value="storey">Ярусный</option>
                     </select>
 
                     <select name="flavor"class="calc__select">
                         <option class="calc__option" value="0">Выберите вкус</option>
-                        <option class="calc__option" value="10">Вкус 1</option>
-                        <option class="calc__option"  value="20">Вкус 2</option>
-                        <option class="calc__option" value="30">Вкус 3</option>
+                        <option class="calc__option" data-price="10" value="flavor1">Вкус 1</option>
+                        <option class="calc__option" data-price="10" value="flavor2">Вкус 2</option>
+                        <option class="calc__option" data-price="30" value="flavor3">Вкус 3</option>
                     </select>
 
                     <select name="design"class="calc__select">
                         <option class="calc__option" value="0">Выберите дизайн</option>
-                        <option class="calc__option" value="10">Рисунок</option>
-                        <option class="calc__option"  value="20">5 цветов</option>
+                        <option class="calc__option" data-price="10" value="img">Рисунок</option>
+                        <option class="calc__option" data-price="20"  value="colors">5 цветов</option>
                     </select>
                     <input type="text" class="kilos-input" placeholder="Введите количество кг">
                 </div>
@@ -236,9 +236,14 @@
         <section class="section form-section">
             <div class="container">
                 <div class="form__title">Напишите мне</div>
-                <form action="#" class="form">
+                <form action="#" class="form" id="data">
                     <input name="name" type="text" class="form__input" placeholder="Имя">
                     <input name="email" type="text" class="form__input" placeholder="e-mail">
+                    <input class="total-input" name="total" type="text">
+                    <div class="form__check">
+                        <label class="form__label" for="checkbox">Использовать данные с калькуялтора</label>
+                        <input class="form__checkbox" type="checkbox" id="checkbox">
+                    </div>
                     <button class="btn form__btn">Отправить</button>
                 </form>
             </div>
