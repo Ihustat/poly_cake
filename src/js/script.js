@@ -114,10 +114,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (target && dot === target) {
                 dot.classList.add('dot_active');
                 rSlides.forEach(slide => {
-                    slide.style.display = 'none';
+                    slide.style.opacity = '0';
                 });
 
-                rSlides[i].style.display = 'flex';
+                rSlides[i].style.opacity = '1';
             };
         });
     });
