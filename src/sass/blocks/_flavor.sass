@@ -1,14 +1,12 @@
 .flavor
     &__text
         margin-top: 15px
-    &__wrapper
-        display: flex
     &__content
         display: grid
         grid-template-columns: repeat(2, minmax(auto, 370px))
-        grid-template-rows: repeat(2, 195px)
+        grid-template-rows: repeat(2, auto)
         grid-auto-rows: 220px
-        gap: 0px 25px
+        gap: 25px 25px
     &__card
         display: flex
         justify-content: space-between
@@ -19,6 +17,8 @@
         &:nth-child(4n+3)
             flex-direction: row-reverse
             text-align: right
+    &__card-descr
+        width: 182px
     &__card-title
         color: $pink
         font-family: $yeseva
@@ -29,4 +29,6 @@
         margin-top: 5px
     &__card-img
         width: 160px
+        height: 135px
+        object-fit: cover
     

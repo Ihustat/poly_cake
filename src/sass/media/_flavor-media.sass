@@ -1,16 +1,16 @@
 @media (max-width: 1200px)
-    .flavor__descr
-        margin-right: 25px
-        max-width: 200px
     .flavor__card-img
         width: 128px
 
 @media (max-width: 900px)
     .flavor__content
         gap: 10px
+        grid-template-rows: repeat(3, minmax(auto, auto))
     .flavor__card, .flavor__card:nth-child(4n), .flavor__card:nth-child(4n+3)
         flex-direction: column
         text-align: left
+    .flavor__card-img
+        margin-top: 10px
 
 @media (max-width: 769px)
     .flavor__card-title
@@ -20,11 +20,12 @@
         font-size: 10px
         line-height: 11px
 
-@media (max-width: 555px)
+@media (max-width: 630px)
     .flavor__wrapper
         flex-direction: column
     .flavor__descr
-        max-width: 100%
+        margin: 0 auto
+        width: 300px  
         text-align: center
     .flavor__content
         margin-top: 15px
@@ -36,3 +37,11 @@
     .flavor__card-img
         margin-top: 10px
         width: 170px
+
+@media( max-width: 481px )
+    .flavor__content
+        grid-template-columns: repeat(2,minmax(auto,147px))
+        gap: 18px
+    .flavor__card-img
+        width: 140px
+    

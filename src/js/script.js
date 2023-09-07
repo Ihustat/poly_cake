@@ -29,12 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
     //examples slider
 
     const sliderInner = document.querySelector('.examples__slider-inner'),
+          sliderWrapper = document.querySelector('.examples__slider'),
           nextArr = document.querySelector('.examples__slider-arrow_right'),
           slides = document.querySelectorAll('.examples__slide'),
           prevArr = document.querySelector('.examples__slider-arrow_left'),
           sliderWidth = parseInt(window.getComputedStyle(slides[0]).width),
           dotsContainer = document.querySelector('.dots__container_examples'),
           dots = [];
+    
+    sliderWrapper.style.width = `${sliderWidth * 2.5}px`
 
     let slidesCounter = 0;
     

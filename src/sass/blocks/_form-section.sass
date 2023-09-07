@@ -2,6 +2,7 @@
     &-section
         background-color: #fff
     &__title
+        text-align: center
         font-family: $yeseva
         font-size: 40px
         font-weight: 400
@@ -9,7 +10,7 @@
     &__input
         padding: 11px 5px
         display: block
-        width: 580px
+        width: 100%
         border-bottom: 1px solid #000
         &:placeholder
             color: #B3B3B3
@@ -21,7 +22,20 @@
         cursor: pointer
         display: block
     &__checkbox
-        cursor: pointer
+        opacity: 0
+        width: 0
+        height: 0
+
+.custom-checkbox
+    transform: translateY(22%)
+    display: inline-block
+    width: 15px
+    height: 15px
+    border: 1px solid #000
+    border-radius: 30%
+
+.form__checkbox:checked+.custom-checkbox
+    background-color: $pink
 
 .total-input
     width: 0
