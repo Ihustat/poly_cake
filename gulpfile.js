@@ -13,6 +13,9 @@ const webp          = require("gulp-webp");
 const imagemin      = require("gulp-imagemin"); 
 const newer         = require("gulp-newer"); 
 const jsonServer    = require('gulp-json-srv');
+const webpack       = require('webpack');
+const webpackStream = require('webpack-stream');
+const webpackConfig = require('./webpack.config.js');
 const server        = jsonServer.create({port: 250});
 
 function images() {
@@ -76,11 +79,18 @@ function json() {
            .pipe(server.pipe());
 };
 
+function webpacker() {
+    return src('src/js/**/*.js')
+           .pipe(webpackStream(webpackConfig), webpack)
+           .pipe(dest('dist/js/'))
+};
+
 function watching() {
     watch(['src/*.html'], html).on('change', browserSync.reload);
     watch(['src/fonts/**/*'], fonts);
     watch(['src/sass/**/*.+(scss|sass|css)'], styles);
     watch(['src/js/**/*.js'], scripts);
+    watch(['src/js/**/*.js'], webpacker);
     watch(['src/images/**'], images);
 };
 
@@ -106,6 +116,7 @@ exports.images = images;
 exports.watching = watching;
 exports.browsersync = browsersync;
 exports.json = json;
+exports.webpacker = webpacker;
 exports.clean = clean;
 
-exports.default = parallel(html, fonts, styles, scripts, images, browsersync, json, watching);
+exports.default = parallel(html, fonts, styles, scripts, webpacker, images, browsersync, json, watching);
