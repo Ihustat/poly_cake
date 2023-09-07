@@ -35,16 +35,20 @@ document.addEventListener('DOMContentLoaded', () => {
           prevArr = document.querySelector('.examples__slider-arrow_left'),
           sliderWidth = parseInt(window.getComputedStyle(slides[0]).width),
           dotsContainer = document.querySelector('.dots__container_examples'),
-          dots = [];
+          dots = [],
+          slidesLength = slides.length;
     
     sliderWrapper.style.width = `${sliderWidth * 2.5}px`
 
-    let slidesCounter = 0;
+    let slidesCounter = 0,
+        offset = 0;
     
     sliderInner.style.width = `${sliderWidth * slides.length}px`;
     
     function changeSlide(n = 0) {
         slidesCounter += n;
+        offset += n;
+ 
         if (slidesCounter > slides.length - 1) slidesCounter = 0;
         if (slidesCounter < 0) slidesCounter = slides.length - 1;
 
@@ -52,16 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
             dot.classList.remove('dot_active');
         });
         dots[slidesCounter].classList.add('dot_active');
-
-        sliderInner.style.transform = `translateX(-${slidesCounter * sliderWidth}px)`;
     };
 
     nextArr.addEventListener('click', () => {
+        sliderInner.append(slides[slidesCounter]);
         changeSlide(1);
     });
 
     prevArr.addEventListener('click', () => {
         changeSlide(-1);
+        sliderInner.prepend(slides[slidesCounter])
+        
     });
 
     slides.forEach(slide => {
