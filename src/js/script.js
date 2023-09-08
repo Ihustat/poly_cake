@@ -8,6 +8,7 @@ import hamburger from "./modules/hamburger";
 import exampleSlider from "./modules/exampleSlider";
 import reviewsSlider from "./modules/reviewsSlider";
 import modal from "./modules/modal";
+import up from "./modules/up";
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,4 +26,5 @@ document.addEventListener('DOMContentLoaded', () => {
     '.dots__container_examples');
     reviewsSlider();
     modal();
+    up();
 });

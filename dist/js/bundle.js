@@ -514,6 +514,33 @@ const reviewsSlider = () => {
 
 /***/ }),
 
+/***/ "./src/js/modules/up.js":
+/*!******************************!*\
+  !*** ./src/js/modules/up.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const up = () => {
+    const upBtn = document.querySelector('.up');
+
+    window.addEventListener('scroll', () => {
+        console.log(window.scrollY)
+        window.scrollY > 400 ? upBtn.style.opacity = '1' :  upBtn.style.opacity = '0';
+    });
+
+    upBtn.addEventListener('click', () => {
+        window.scrollTo(0, 0);
+    });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (up);
+
+/***/ }),
+
 /***/ "./node_modules/axios/lib/adapters/adapters.js":
 /*!*****************************************************!*\
   !*** ./node_modules/axios/lib/adapters/adapters.js ***!
@@ -4627,9 +4654,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_exampleSlider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/exampleSlider */ "./src/js/modules/exampleSlider.js");
 /* harmony import */ var _modules_reviewsSlider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/reviewsSlider */ "./src/js/modules/reviewsSlider.js");
 /* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
+/* harmony import */ var _modules_up__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/up */ "./src/js/modules/up.js");
 'use stirct'
 
 ;
+
 
 
 
@@ -4654,6 +4683,7 @@ document.addEventListener('DOMContentLoaded', () => {
     '.dots__container_examples');
     (0,_modules_reviewsSlider__WEBPACK_IMPORTED_MODULE_6__["default"])();
     (0,_modules_modal__WEBPACK_IMPORTED_MODULE_7__["default"])();
+    (0,_modules_up__WEBPACK_IMPORTED_MODULE_8__["default"])();
 });
 })();
 

@@ -56,9 +56,9 @@ body
     &_active
         background-color: #7B6152
 
-.gift
+.gift, .up
     position: fixed
-    bottom: 50px
+    top: 70px
     right: 75px
     display: flex
     align-items: center
@@ -68,6 +68,12 @@ body
     height: 65px
     border-radius: 100%
     cursor: pointer
+
+.up
+    opacity: 0
+    top: auto
+    bottom: 50px
+    transition: opacity .3s
 
 .hidden
     display: none

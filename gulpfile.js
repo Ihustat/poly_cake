@@ -48,10 +48,10 @@ function styles() {
 
 
 function scripts() {
-    return src('src/js/**/*.js')
-            .pipe(uglify())
-            .pipe(rename({suffix: '.min', prefix: ''}))
-            .pipe(dest('dist/js'))
+    return src('src/js/*.js')
+            // .pipe(uglify())
+            // .pipe(rename({suffix: '.min', prefix: ''}))
+            // .pipe(dest('dist/js'))
             // .pipe(dest('C:/openserver/domains/polyCake/js'))
             .pipe(browserSync.stream());
 };
