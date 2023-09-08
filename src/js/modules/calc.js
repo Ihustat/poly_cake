@@ -1,7 +1,8 @@
 const calc = () => {
     const total = document.querySelector('.calc__total span'),
           selects = document.querySelectorAll('.calc__select'),
-          calcInput = document.querySelector('.kilos-input');
+          calcInput = document.querySelector('.kilos-input'),
+          promo = document.querySelector('.calc__input');
 
     function changeValue() {
         const values = [];
@@ -26,10 +27,18 @@ const calc = () => {
                 });
             };
         });
-        
-        total.textContent = values.reduce((sum, current) => sum + current);
 
-        document.querySelector('.total-input').value = `${total.textContent}`;
+        let totalSum = 0;
+        
+        totalSum = values.reduce((sum, current) => sum + current);
+
+        promo.value === 'IWANTCAKE' ? total.textContent = totalSum * .9 : total.textContent = totalSum;
+
+            document.querySelector('.total-input').value = `${+total.textContent}`;
+ 
+
+        // promo.value === 'IWANTCAKE' ? document.querySelector('.total-input').value = `${total.textContent * .9}` : document.querySelector('.total-input').value = `${total.textContent}`;
+
     };
     
         selects.forEach(select => {
@@ -38,6 +47,10 @@ const calc = () => {
     
                 changeValue();
             });
+        });
+
+        promo.addEventListener('input', () => {
+            changeValue();
         });
     
         calcInput.addEventListener('input', () => {

@@ -74,7 +74,9 @@
                 <div class="section__wrapper about__wrapper">
                     <div class="section__descr about__content ">
                         <h3 class="title about__title">Обо мне</h3>
-                        <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro totam reprehenderit illo saepe doloribus ullam ab exercitationem architecto molestias laborum natus incidunt voluptatum itaque eum ducimus, odit dolores, corrupti error!</p>
+                        <p class="text ">Меня зовут Полина и я рада, что вы выбрали меня в качестве кондитера, который сделает для вас торт!
+                            В кондитерском деле уже три года. За это время мною было приготовлено больше 300 тортов, а также пройдены курсы и получен диплом от школы <span class="about__text_upper">@madeitschool.</span>
+                            Я работаю в современном стиле и стиле «минимализм». Буду рада, если наши вкусы совпадут и мы вместе придумаем для вас самый лучший дизайн торта, который мне нужно будет осуществить.</p>
                     </div>
                     <div class="about__images">
                         <div class="about__image-box">
@@ -99,7 +101,7 @@
                 <div class="section__wrapper flavor__wrapper">
                     <div class="section__descr flavor__descr">
                         <h3 class="title flavor__title">Вкусы</h3>
-                        <div class="text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit debitis similique iste sapi</div>
+                        <div class="text">Здесь представлены самые популярные вкусы. Если вы хотите что-то другое, просто напишите мне.</div>
                   </div>
     
                   <div class="flavor__content">
@@ -113,7 +115,7 @@
                 <div class="section__wrapper">
                     <div class="section__descr examples__descr">
                         <div class="title examples__title">Примеры работ</div>
-                        <div class="text examples__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, mollitia dicta doloremque dignissimos.</div>
+                        <div class="text examples__text">Примеры моих работ.</div>
                     </div>
     
                     <div class="examples__slider">
@@ -148,7 +150,7 @@
                 <div class="section__wrapper">
                     <div class="section__descr reviews__descr">
                         <div class="title">Отзывы</div>
-                        <div class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, mollitia dicta doloremque dignissimos.</div>
+                        <div class="text">Отзывы моих клиентов, которые остались довольны своим заказом.</div>
                     </div>
     
                     <div class="reviews__slider">
@@ -185,8 +187,8 @@
             <div class="container">
                 <div class="section__wrapper">
                     <div class="section__descr questions__descr">
-                        <div class="title">ЧАВО</div>
-                        <div class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, mollitia dicta doloremque dignissimos.</div>
+                        <div class="title">Частые вопросы</div>
+                        <div class="text">Здесь вы можете увидеть отеты на часто задаваемые вопросы.</div>
                     </div>
     
                     <div class="questions__content">
@@ -219,11 +221,12 @@
         </section>
 
         <section class="section calc" id="calc">
+
             <div class="container">
                <div class=" calc__wrapper">
                 <div class=" calc__descr">
-                    <div class="title">Калькулятор</div>
-                    <div class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, mollitia dicta doloremque dignissimos.</div>
+                    <div class="title">Рассчитать стоимость</div>
+                    <div class="text">Здесь вы можете выбрать параметры вашего торта и узнать примерную цену.</div>
                 </div>
                 <div class="calc__inner">
                     <select name="size"class="calc__select" data-size="true">
@@ -249,6 +252,7 @@
                         <option class="calc__option" data-price="10" value="img">Рисунок</option>
                         <option class="calc__option" data-price="20"  value="colors">5 цветов</option>
 
+                        <input name="promo" type="text" class="calc__input" placeholder="Введите промокод">
                 </div>
                 <div class="calc__total">Примерная цена: <span>___</span> р.</div>
                </div>
@@ -258,7 +262,8 @@
         <section class="section form-section">
             <div class="container">
                 <div class="title form__title">Напишите мне</div>
-                <form action="#" class="form" id="data">
+                <div class="text form__text">Для заказа заполните форму и отправьте мне. Я свяжусь с вами в ближайшее время.</div>
+                <form action="#" class="form" id="data" >
                     <input name="name" type="text" class="form__input" placeholder="Имя">
                     <input name="email" type="text" class="form__input" placeholder="e-mail">
                     <input class="total-input" name="total" type="text">
@@ -322,7 +327,21 @@
             </div>
         </div>
     </footer>
-     
+
+    <div class="gift">
+        <img src="images/icons/gift.svg" alt="" class="gift__img">
+    </div>
+
+    <div class="modal">
+        <div class="modal__dialog">
+            <div class="modal__content">
+                <div class="modal__close">&times;</div>
+                <div class="title modal__title">Вам подарок!</div>
+                <div class="text modal__text">При использовании промокода "IWANTCAKE" скидка 10% на первый заказа!</div>
+                <button class="btn modal__btn">Использовать промокод</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/bundle.js"></script>
 </body>

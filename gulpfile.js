@@ -83,6 +83,7 @@ function webpacker() {
     return src('src/js/**/*.js')
            .pipe(webpackStream(webpackConfig), webpack)
            .pipe(dest('dist/js/'))
+        //    .pipe(dest('C:/openserver/domains/polyCake/js'))
 };
 
 function watching() {

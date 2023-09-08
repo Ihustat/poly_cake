@@ -26,12 +26,16 @@ const flavors = () => {
     async function getData(url) {
         const res = await fetch(url);
 
+        if (!res.ok) {
+            throw new Error(`Сервер не отвечает. Поробуйте позже`);
+        };
+
         return await res.json();
     };
 
-    getData('http://localhost:250/flavors')
+    getData('./js/db.json')
     .then(data => {
-        data.forEach(({title, img, alt, lines}) => {
+        data.flavors.forEach(({title, img, alt, lines}) => {
             renderFlavor(title, img, alt, lines);
         });
     });

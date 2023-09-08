@@ -1,0 +1,32 @@
+.modal
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 1000
+    display: none
+    width: 100%
+    height: 100%
+    overflow: hidden
+    background-color: rgba(0, 0, 0, .5)
+    text-align: center
+    &__dialog
+        max-width: 500px
+        margin: 40px auto
+    &__content
+        position: relative
+        width: 100%
+        padding: 40px
+        background-color: $pink
+        max-height: 80vh
+    &__close
+        position: absolute
+        top: 8px
+        right: 14px
+        color:#000
+        opacity: .5
+        font-weight: 700
+        border: none
+        background-color: transparent
+        cursor: pointer
+    &__btn
+        background-color: #fff

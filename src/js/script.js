@@ -7,10 +7,11 @@ import form from "./modules/form";
 import hamburger from "./modules/hamburger";
 import exampleSlider from "./modules/exampleSlider";
 import reviewsSlider from "./modules/reviewsSlider";
+import modal from "./modules/modal";
 
 
 document.addEventListener('DOMContentLoaded', () => {
- ///accordeon
+
    accordeon();
    calc();
    flavors();
@@ -23,5 +24,5 @@ document.addEventListener('DOMContentLoaded', () => {
     '.examples__slider-arrow_right',
     '.dots__container_examples');
     reviewsSlider();
-
+    modal();
 });
