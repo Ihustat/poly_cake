@@ -11,6 +11,7 @@ import modal from "./modules/modal";
 import up from "./modules/up";
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
 
    accordeon();
@@ -27,4 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     reviewsSlider();
     modal();
     up();
+
+
 });

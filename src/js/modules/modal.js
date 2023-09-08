@@ -45,14 +45,14 @@ const modal = () => {
         window.scrollTo(0, coords)
     });
 
-    function openModalByScroll() {
-        if ((document.documentElement.scrollHeight <= window.scrollY + document.documentElement.clientHeight) && !isOpen) {
-            openModal();
-            window.removeEventListener('scroll', openModalByScroll);
-        };
-    };
+    // function openModalByScroll() {
+    //     if ((document.documentElement.scrollHeight <= window.scrollY + document.documentElement.clientHeight) && !isOpen) {
+    //         openModal();
+    //         window.removeEventListener('scroll', openModalByScroll);
+    //     };
+    // };
 
-    window.addEventListener('scroll', openModalByScroll);
+    // window.addEventListener('scroll', openModalByScroll);
 
 };
 

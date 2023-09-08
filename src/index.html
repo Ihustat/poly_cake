@@ -264,13 +264,19 @@
                 <div class="title form__title">Напишите мне</div>
                 <div class="text form__text">Для заказа заполните форму и отправьте мне. Я свяжусь с вами в ближайшее время.</div>
                 <form action="#" class="form" id="data" >
-                    <input name="name" type="text" class="form__input" placeholder="Имя">
-                    <input name="email" type="text" class="form__input" placeholder="e-mail">
+
+                    <input required name="name" type="text" class="form__input" placeholder="Имя" >
+
+                    <input required name="phone" type="tel" class="form__input form__phone" placeholder="+7( ___ )___-__-__" >
+
                     <input class="total-input" name="total" type="text">
+
                     <div class="form__check">
+
                         <label class="form__label" for="checkbox">Использовать данные с калькуялтора</label>
                         <input class="form__checkbox" type="checkbox" id="checkbox">
                         <label for="checkbox" class="custom-checkbox"></label>
+                        
                     </div>
                     <button class="btn form__btn">Отправить</button>
                 </form>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import validation from './validation';
 
 const form = () => {
     const form = document.querySelector('.form'),
@@ -6,6 +7,7 @@ const form = () => {
           chekbox = document.querySelector('.form__checkbox'),
           selects = document.querySelectorAll('.calc__select'),
           calcInput = document.querySelector('.kilos-input'),
+          btn = document.querySelector('.form__btn'),
           response = {
             succes: 'Мы вам перезвоним',
             loading: 'Отправляем...',
@@ -14,6 +16,7 @@ const form = () => {
         
     let message = `Сообщение о заказе`;
 
+    validation(inputs, btn);
 
     function createMessage() {
 
@@ -38,7 +41,6 @@ ${calcInput.name}: ${calcInput.value};
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
         const TOKEN = "6151406167:AAHlicX7RwVWpi53sLRIumF_d4QnblwK3tE";
         const CHAT_ID = "-903266664";
         const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
@@ -48,8 +50,6 @@ ${calcInput.name}: ${calcInput.value};
         const responseBlock = document.createElement('div');
         responseBlock.textContent = response.loading;
         form.append(responseBlock);
-
-        
 
 
         axios.post(URI_API, {
