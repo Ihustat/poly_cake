@@ -376,10 +376,13 @@ const modal = () => {
           promoBtn = document.querySelector('.modal__btn'),
           promoCode = 'IWANTCAKE';
 
+    let isOpen = false;
+
     function openModal() {
         modal.style.display = 'block';
         document.documentElement.style.overflow = 'hidden';
         trigger.remove();
+        isOpen = true;
     };
 
     function closeModal() {
@@ -408,7 +411,21 @@ const modal = () => {
     promoBtn.addEventListener('click', () =>{ 
         document.querySelector('.calc__input').value = promoCode;
         closeModal();
+
+        const coords = document.querySelector('.calc').offsetTop;
+
+        window.scrollTo(0, coords)
     });
+
+    function openModalByScroll() {
+        if ((document.documentElement.scrollHeight <= window.scrollY + document.documentElement.clientHeight) && !isOpen) {
+            openModal();
+            window.removeEventListener('scroll', openModalByScroll);
+        };
+    };
+
+    window.addEventListener('scroll', openModalByScroll);
+
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modal);
