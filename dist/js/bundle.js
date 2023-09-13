@@ -66,7 +66,7 @@ const calc = () => {
         if (select.getAttribute('data-size')) {
             if (select.value === 'kilos') {
                 calcInput.style.display = 'block';
-                values.push(+calcInput.value * 100);
+                values.push(+calcInput.value * 1300);
             } else {
                 calcInput.style.display = 'none';
             };
@@ -413,13 +413,25 @@ const modal = () => {
           promoCode = 'IWANTCAKE';
 
     let isOpen = false,
-        modalTimer;
+        modalTimer = setTimeout(() => {
+            if (!isOpen) openModal();
+        }, 60000);
+
+    try {
+        if (localStorage.getItem('isOpen')) {
+            isOpen = true;
+            trigger.remove();
+        };
+    } catch (e) {
+
+    };
 
     function openModal() {
         modal.style.display = 'block';
         document.documentElement.style.overflow = 'hidden';
         trigger.remove();
         isOpen = true;
+        localStorage.setItem('isOpen', isOpen);
         clearInterval(modalTimer);
     };
 
@@ -525,7 +537,6 @@ console.log(touchStart, touchEnd)
 
         slide.addEventListener('touchstart', (e) => {
             touchStart = e.changedTouches[0].screenX;
-            console.log('start')
         });
     });
 
@@ -539,7 +550,6 @@ console.log(touchStart, touchEnd)
         slide.addEventListener('touchend', (e) => {
             touchEnd = e.changedTouches[0].screenX;
              changeSlideByTouch();
-             console.log('end')
          });
     });
 

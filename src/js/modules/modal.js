@@ -5,13 +5,25 @@ const modal = () => {
           promoCode = 'IWANTCAKE';
 
     let isOpen = false,
-        modalTimer;
+        modalTimer = setTimeout(() => {
+            if (!isOpen) openModal();
+        }, 60000);
+
+    try {
+        if (localStorage.getItem('isOpen')) {
+            isOpen = true;
+            trigger.remove();
+        };
+    } catch (e) {
+
+    };
 
     function openModal() {
         modal.style.display = 'block';
         document.documentElement.style.overflow = 'hidden';
         trigger.remove();
         isOpen = true;
+        localStorage.setItem('isOpen', isOpen);
         clearInterval(modalTimer);
     };
 

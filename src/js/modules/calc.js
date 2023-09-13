@@ -12,7 +12,7 @@ const calc = () => {
         if (select.getAttribute('data-size')) {
             if (select.value === 'kilos') {
                 calcInput.style.display = 'block';
-                values.push(+calcInput.value * 100);
+                values.push(+calcInput.value * 1300);
             } else {
                 calcInput.style.display = 'none';
             };

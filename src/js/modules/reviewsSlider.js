@@ -36,7 +36,6 @@ console.log(touchStart, touchEnd)
 
         slide.addEventListener('touchstart', (e) => {
             touchStart = e.changedTouches[0].screenX;
-            console.log('start')
         });
     });
 
@@ -50,7 +49,6 @@ console.log(touchStart, touchEnd)
         slide.addEventListener('touchend', (e) => {
             touchEnd = e.changedTouches[0].screenX;
              changeSlideByTouch();
-             console.log('end')
          });
     });
 
