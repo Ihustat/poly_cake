@@ -40,9 +40,11 @@ const exampleSlider = (sliderInn, slides, prArr, nxtArr,) => {
         });
 
         sliderInner.addEventListener('touchstart', (e) => {
+            e.preventDefault();
             touchStart = e.changedTouches[0].screenX;
         });
         sliderInner.addEventListener('touchend', (e) => {
+            e.preventDefault();
            touchEnd = e.changedTouches[0].screenX;
             changeSlideByTouch();
         });

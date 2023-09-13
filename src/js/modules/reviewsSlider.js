@@ -35,7 +35,9 @@ console.log(touchStart, touchEnd)
         });
 
         slide.addEventListener('touchstart', (e) => {
+            e.preventDefault();
             touchStart = e.changedTouches[0].screenX;
+            clearInterval(sliderTimer);
         });
     });
 
@@ -47,8 +49,12 @@ console.log(touchStart, touchEnd)
         });
 
         slide.addEventListener('touchend', (e) => {
+            e.preventDefault();
             touchEnd = e.changedTouches[0].screenX;
              changeSlideByTouch();
+             sliderTimer = setInterval(() => {
+                changeSlide(++dotsCounter);
+            }, 5000);
          });
     });
 
