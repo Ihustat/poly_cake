@@ -434,11 +434,6 @@ const modal = () => {
         window.scrollTo(0, coords)
     });
 
-    // function showModalByTime() {
-    //     modalTimer = setTimeout(() => {
-    //         openModal();
-    //     }, 3000);
-    // };
 
     function modalObserverCallback(entries, observer){
         if (!isOpen && entries[0].isIntersecting) {
