@@ -273,52 +273,66 @@ const form = () => {
             fail: 'Что-то пошло не так'
           };
         
-    let message = `Сообщение о заказе`;
+    let message = '',
+        responseBlock;
+
+    
 
     (0,_validation__WEBPACK_IMPORTED_MODULE_0__["default"])(inputs, btn);
 
-    function createMessage() {
+    function createResponseBlock() {
+        responseBlock = document.createElement('div');
+        responseBlock.textContent = response.loading;
+        form.append(responseBlock);
+    };
+
+    function createMessage(startMessage) {
+
+        message += `${startMessage};\n`
 
         inputs.forEach(input => {
-            message += `
-${input.name}: ${input.value};
-            `
+            message += `${input.name}: ${input.value};\n`
         });
 
         if (chekbox.checked) {
             selects.forEach(select => {
-                message += `
-${select.name}: ${select.value};
-                `
+                message += `${select.name}: ${select.value};\n`
             });
 
-            message += `
-${calcInput.name}: ${calcInput.value};
-            `
+            message += `${calcInput.name}: ${calcInput.value};\n `
         };
     };
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    async function sendData(message) {
         const TOKEN = "6151406167:AAHlicX7RwVWpi53sLRIumF_d4QnblwK3tE";
         const CHAT_ID = "-903266664";
         const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-        createMessage();
+       const res = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].post(URI_API, {
+            chat_id: CHAT_ID,
+            text: message
+          });
 
-        const responseBlock = document.createElement('div');
-        responseBlock.textContent = response.loading;
-        form.append(responseBlock);
+        return await new Promise(function(resolve) {
+            resolve(message);
+        });
+    };
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
 
-        axios__WEBPACK_IMPORTED_MODULE_1__["default"].post(URI_API, {
-          chat_id: CHAT_ID,
-          text: message
-        })
+        createMessage('Сообщение о заказе');
+        createResponseBlock();
+        
+
+
+        sendData(message)
         .then(() => {
             responseBlock.textContent = response.succes;
         })
-        .catch(() => {
+        .catch((e) => {
+            console.log(e)
             responseBlock.textContent = response.fail;
         })
         .finally(() => {
@@ -328,7 +342,7 @@ ${calcInput.name}: ${calcInput.value};
                 inputs.forEach(input => {
                     input.value = '';
                 });
-            }, 2000)
+            }, 3000)
         });
     });
 };
@@ -377,13 +391,15 @@ const modal = () => {
           promoBtn = document.querySelector('.modal__btn'),
           promoCode = 'IWANTCAKE';
 
-    let isOpen = false;
+    let isOpen = false,
+        modalTimer;
 
     function openModal() {
         modal.style.display = 'block';
         document.documentElement.style.overflow = 'hidden';
         trigger.remove();
         isOpen = true;
+        clearInterval(modalTimer);
     };
 
     function closeModal() {
@@ -418,15 +434,26 @@ const modal = () => {
         window.scrollTo(0, coords)
     });
 
-    // function openModalByScroll() {
-    //     if ((document.documentElement.scrollHeight <= window.scrollY + document.documentElement.clientHeight) && !isOpen) {
+    // function showModalByTime() {
+    //     modalTimer = setTimeout(() => {
     //         openModal();
-    //         window.removeEventListener('scroll', openModalByScroll);
-    //     };
+    //     }, 3000);
     // };
 
-    // window.addEventListener('scroll', openModalByScroll);
+    function modalObserverCallback(entries, observer){
+        if (!isOpen && entries[0].isIntersecting) {
+            openModal();
+        };
+    };
 
+    const modalObserverOptions = {
+        root: null,
+        threshold: .9
+    };
+
+    const modalObserver = new IntersectionObserver(modalObserverCallback, modalObserverOptions);
+
+    modalObserver.observe(document.querySelector('.calc'));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modal);
@@ -556,7 +583,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const validation = (elements, trigger) => {
 
-
+        let isMaskFull = false;
+        let isInputFull = false;
 
         function checkText(text) {
             text.value = text.value.replace(/\d/g, '');
@@ -567,6 +595,27 @@ const validation = (elements, trigger) => {
                 mask: "+{7} (000) 000-00-00",
                 lazy: false
               })
+
+              mask.masked.isComplete ? isMaskFull = true : isMaskFull = false;
+        };
+
+        function checkFull() {
+            for (let i = 0; i < elements.length; i++) {
+                if (elements[i].value === '') {
+                    isInputFull = false;
+                    break;
+                } else {
+                    isInputFull = true;
+                };
+            };
+
+            if (isMaskFull && isInputFull) {
+                trigger.style.opacity = '1';
+                trigger.removeAttribute('disabled');
+            } else {
+                trigger.style.opacity = '0.4';
+                trigger.setAttribute('disabled', true);
+            };
         };
 
     
@@ -577,10 +626,14 @@ const validation = (elements, trigger) => {
                     break;
                     case 'tel': checkNum(elem);
                     break;
-                }
+                };
+
+                checkFull();
             });
         });
     };
+
+
 
 
 

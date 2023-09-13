@@ -14,52 +14,66 @@ const form = () => {
             fail: 'Что-то пошло не так'
           };
         
-    let message = `Сообщение о заказе`;
+    let message = '',
+        responseBlock;
+
+    
 
     validation(inputs, btn);
 
-    function createMessage() {
+    function createResponseBlock() {
+        responseBlock = document.createElement('div');
+        responseBlock.textContent = response.loading;
+        form.append(responseBlock);
+    };
+
+    function createMessage(startMessage) {
+
+        message += `${startMessage};\n`
 
         inputs.forEach(input => {
-            message += `
-${input.name}: ${input.value};
-            `
+            message += `${input.name}: ${input.value};\n`
         });
 
         if (chekbox.checked) {
             selects.forEach(select => {
-                message += `
-${select.name}: ${select.value};
-                `
+                message += `${select.name}: ${select.value};\n`
             });
 
-            message += `
-${calcInput.name}: ${calcInput.value};
-            `
+            message += `${calcInput.name}: ${calcInput.value};\n `
         };
     };
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    async function sendData(message) {
         const TOKEN = "6151406167:AAHlicX7RwVWpi53sLRIumF_d4QnblwK3tE";
         const CHAT_ID = "-903266664";
         const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-        createMessage();
+       const res = await axios.post(URI_API, {
+            chat_id: CHAT_ID,
+            text: message
+          });
 
-        const responseBlock = document.createElement('div');
-        responseBlock.textContent = response.loading;
-        form.append(responseBlock);
+        return await new Promise(function(resolve) {
+            resolve(message);
+        });
+    };
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
 
-        axios.post(URI_API, {
-          chat_id: CHAT_ID,
-          text: message
-        })
+        createMessage('Сообщение о заказе');
+        createResponseBlock();
+        
+
+
+        sendData(message)
         .then(() => {
             responseBlock.textContent = response.succes;
         })
-        .catch(() => {
+        .catch((e) => {
+            console.log(e)
             responseBlock.textContent = response.fail;
         })
         .finally(() => {
@@ -69,7 +83,7 @@ ${calcInput.name}: ${calcInput.value};
                 inputs.forEach(input => {
                     input.value = '';
                 });
-            }, 2000)
+            }, 3000)
         });
     });
 };

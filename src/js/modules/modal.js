@@ -4,13 +4,15 @@ const modal = () => {
           promoBtn = document.querySelector('.modal__btn'),
           promoCode = 'IWANTCAKE';
 
-    let isOpen = false;
+    let isOpen = false,
+        modalTimer;
 
     function openModal() {
         modal.style.display = 'block';
         document.documentElement.style.overflow = 'hidden';
         trigger.remove();
         isOpen = true;
+        clearInterval(modalTimer);
     };
 
     function closeModal() {
@@ -45,15 +47,26 @@ const modal = () => {
         window.scrollTo(0, coords)
     });
 
-    // function openModalByScroll() {
-    //     if ((document.documentElement.scrollHeight <= window.scrollY + document.documentElement.clientHeight) && !isOpen) {
+    // function showModalByTime() {
+    //     modalTimer = setTimeout(() => {
     //         openModal();
-    //         window.removeEventListener('scroll', openModalByScroll);
-    //     };
+    //     }, 3000);
     // };
 
-    // window.addEventListener('scroll', openModalByScroll);
+    function modalObserverCallback(entries, observer){
+        if (!isOpen && entries[0].isIntersecting) {
+            openModal();
+        };
+    };
 
+    const modalObserverOptions = {
+        root: null,
+        threshold: .9
+    };
+
+    const modalObserver = new IntersectionObserver(modalObserverCallback, modalObserverOptions);
+
+    modalObserver.observe(document.querySelector('.calc'));
 };
 
 export default modal;
