@@ -7,7 +7,8 @@ const exampleSlider = (sliderInn, slides, prArr, nxtArr,) => {
           nextArr = document.querySelector(nxtArr),
           sliderWidth = parseInt(window.getComputedStyle(allSlides[0]).width);
         
-    let slidesCounter = 0;
+    let slidesCounter = 0,
+        touchStart, touchEnd;
 
     sliderInner.style.width = `${sliderWidth * slides.length}px`;
 
@@ -15,6 +16,17 @@ const exampleSlider = (sliderInn, slides, prArr, nxtArr,) => {
         slidesCounter += n;
  
         slidesCounter = checkCounter(slidesCounter, allSlides.length - 1);
+    };
+
+    function changeSlideByTouch() {
+
+        if (touchStart > touchEnd) {
+            sliderInner.append(allSlides[slidesCounter]);
+            changeSlide(1);
+        } else {
+            changeSlide(-1);
+            sliderInner.prepend(allSlides[slidesCounter]);
+        };
     };
 
         nextArr.addEventListener('click', () => {
@@ -26,6 +38,15 @@ const exampleSlider = (sliderInn, slides, prArr, nxtArr,) => {
             changeSlide(-1);
             sliderInner.prepend(allSlides[slidesCounter]);
         });
+
+        sliderInner.addEventListener('touchstart', (e) => {
+            touchStart = e.changedTouches[0].screenX;
+        });
+        sliderInner.addEventListener('touchend', (e) => {
+           touchEnd = e.changedTouches[0].screenX;
+            changeSlideByTouch();
+        });
+
 
     changeSlide();
 };

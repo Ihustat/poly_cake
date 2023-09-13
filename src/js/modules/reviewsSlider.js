@@ -9,6 +9,16 @@ const reviewsSlider = () => {
     let sliderTimer = setInterval(() => {
         changeSlide(++dotsCounter);
     }, 5000);
+    let touchStart, touchEnd;
+
+    function changeSlideByTouch() {
+console.log(touchStart, touchEnd)
+        if (touchStart > touchEnd) {
+            changeSlide(dotsCounter + 1);
+        } else {
+            changeSlide(dotsCounter - 1);
+        };
+    };
 
     slides.forEach(() => {
     const dot = document.createElement('div');
@@ -23,6 +33,11 @@ const reviewsSlider = () => {
         slide.addEventListener('mouseenter', () => {
             clearInterval(sliderTimer);
         });
+
+        slide.addEventListener('touchstart', (e) => {
+            touchStart = e.changedTouches[0].screenX;
+            console.log('start')
+        });
     });
 
     slides.forEach(slide => {
@@ -31,6 +46,12 @@ const reviewsSlider = () => {
                 changeSlide(++dotsCounter);
             }, 5000);
         });
+
+        slide.addEventListener('touchend', (e) => {
+            touchEnd = e.changedTouches[0].screenX;
+             changeSlideByTouch();
+             console.log('end')
+         });
     });
 
     function changeSlide(n) {

@@ -161,7 +161,8 @@ const exampleSlider = (sliderInn, slides, prArr, nxtArr,) => {
           nextArr = document.querySelector(nxtArr),
           sliderWidth = parseInt(window.getComputedStyle(allSlides[0]).width);
         
-    let slidesCounter = 0;
+    let slidesCounter = 0,
+        touchStart, touchEnd;
 
     sliderInner.style.width = `${sliderWidth * slides.length}px`;
 
@@ -169,6 +170,17 @@ const exampleSlider = (sliderInn, slides, prArr, nxtArr,) => {
         slidesCounter += n;
  
         slidesCounter = (0,_checkCounter__WEBPACK_IMPORTED_MODULE_0__["default"])(slidesCounter, allSlides.length - 1);
+    };
+
+    function changeSlideByTouch() {
+
+        if (touchStart > touchEnd) {
+            sliderInner.append(allSlides[slidesCounter]);
+            changeSlide(1);
+        } else {
+            changeSlide(-1);
+            sliderInner.prepend(allSlides[slidesCounter]);
+        };
     };
 
         nextArr.addEventListener('click', () => {
@@ -180,6 +192,15 @@ const exampleSlider = (sliderInn, slides, prArr, nxtArr,) => {
             changeSlide(-1);
             sliderInner.prepend(allSlides[slidesCounter]);
         });
+
+        sliderInner.addEventListener('touchstart', (e) => {
+            touchStart = e.changedTouches[0].screenX;
+        });
+        sliderInner.addEventListener('touchend', (e) => {
+           touchEnd = e.changedTouches[0].screenX;
+            changeSlideByTouch();
+        });
+
 
     changeSlide();
 };
@@ -477,6 +498,16 @@ const reviewsSlider = () => {
     let sliderTimer = setInterval(() => {
         changeSlide(++dotsCounter);
     }, 5000);
+    let touchStart, touchEnd;
+
+    function changeSlideByTouch() {
+console.log(touchStart, touchEnd)
+        if (touchStart > touchEnd) {
+            changeSlide(dotsCounter + 1);
+        } else {
+            changeSlide(dotsCounter - 1);
+        };
+    };
 
     slides.forEach(() => {
     const dot = document.createElement('div');
@@ -491,6 +522,11 @@ const reviewsSlider = () => {
         slide.addEventListener('mouseenter', () => {
             clearInterval(sliderTimer);
         });
+
+        slide.addEventListener('touchstart', (e) => {
+            touchStart = e.changedTouches[0].screenX;
+            console.log('start')
+        });
     });
 
     slides.forEach(slide => {
@@ -499,6 +535,12 @@ const reviewsSlider = () => {
                 changeSlide(++dotsCounter);
             }, 5000);
         });
+
+        slide.addEventListener('touchend', (e) => {
+            touchEnd = e.changedTouches[0].screenX;
+             changeSlideByTouch();
+             console.log('end')
+         });
     });
 
     function changeSlide(n) {
