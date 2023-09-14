@@ -83,6 +83,7 @@ const form = () => {
                 inputs.forEach(input => {
                     input.value = '';
                 });
+                chekbox.checked = false;
             }, 3000)
         });
     });

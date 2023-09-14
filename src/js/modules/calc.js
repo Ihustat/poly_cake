@@ -34,11 +34,9 @@ const calc = () => {
 
         promo.value === 'IWANTCAKE' ? total.textContent = totalSum * .9 : total.textContent = totalSum;
 
-            document.querySelector('.total-input').value = `${+total.textContent}`;
+        document.querySelector('.total-input').value = `${+total.textContent}`;
+        console.log(document.querySelector('.total-input').value)
  
-
-        // promo.value === 'IWANTCAKE' ? document.querySelector('.total-input').value = `${total.textContent * .9}` : document.querySelector('.total-input').value = `${total.textContent}`;
-
     };
     
         selects.forEach(select => {

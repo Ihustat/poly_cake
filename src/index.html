@@ -78,6 +78,7 @@
                 </div>
               </div>
         </div>
+        <div class="overlay"></div>
     </header>
 
     <main class="main">
@@ -190,29 +191,20 @@
                                 <div class="reviews__slide-descr">
                                     <div class="reviews__slide-name">Лера</div>
                                     <div class="text reviews__slide-text">Оооооочень вкусный торт! Всем понравился, все в восторге! Такой нежный, свежий, лёгкий, хочется есть бесконечно.</div>
-                                    <a href="#calc" class="btn reviews__btn">
-                                        Заказать
-                                <a>
                                 </div>
                             </div>
                             <div class="reviews__slide">
                                 <img src="images/reviews/reviews-2.jpg" alt="review img" class="reviews__slide-img">
                                 <div class="reviews__slide-descr">
                                     <div class="reviews__slide-name">Саша</div>
-                                    <div class="text reviews__slide-text">Доставили тортик, это просто прекрасно, он очень милый и аккуратный, а упакован шикарно. Спасибо вавм БОльшое!</div>
-                                    <a href="#calc" class="btn reviews__btn">
-                                        Заказать
-                                <a>
+                                    <div class="text reviews__slide-text">Доставили тортик, это просто прекрасно, он очень милый и аккуратный, а упакован шикарно. Спасибо вам Большое!</div>
                                 </div>
                         </div>
                         <div class="reviews__slide">
                             <img src="images/reviews/reviews-3.jpg" alt="review img" class="reviews__slide-img">
                             <div class="reviews__slide-descr">
                                 <div class="reviews__slide-name">Ксения</div>
-                                <div class="text reviews__slide-text">Добрый вечер, хотела сказать вам большое спасибо за торт, безумно вкусныц и красивый, именинница была в восторге и мы вместе с ней</div>
-                                <a href="#calc" class="btn reviews__btn">
-                                    Заказать
-                            <a>
+                                <div class="text reviews__slide-text">Добрый вечер, хотела сказать вам большое спасибо за торт, безумно вкусный и красивый, именинница была в восторге и мы вместе с ней</div>
                             </div>
                     </div>
     
@@ -238,8 +230,7 @@
                                 <div class="questions__title">Как осуществляется доставка?</div>
                                 <img src="images/icons/arrow.svg" alt="arrow" class="questions__line-arrow">
                             </div>
-                            <div class="questions__text" >Вы можете забрать торт самовывозом (данная функция бесплатна).
-                            <span>Вы можете воспользоваться доставкой (стоимость по тарифам служб такси).</span></div>
+                            <div class="questions__text" >Вы можете забрать торт самовывозом (данная функция бесплатна).<span>Вы можете воспользоваться доставкой (стоимость по тарифам служб такси).</span></div>
                         </div>
                         <div class="questions__line">
                             <div class="questions__line-header">
@@ -282,20 +273,20 @@
 
                     <select name="flavor"class="calc__select">
                         <option class="calc__option" value="0">Выберите вкус</option>
-                        <option class="calc__option" data-price="0" value="flavor1">Банановый</option>
-                        <option class="calc__option" data-price="100" value="flavor2">Красный бархат</option>
-                        <option class="calc__option" data-price="0" value="flavor4">Вишнёвый</option>
-                        <option class="calc__option" data-price="0" value="flavor5">Малиновый</option>
-                        <option class="calc__option" data-price="100" value="flavor6">Сникерс</option>
+                        <option class="calc__option" data-price="0" value="Banana">Банановый</option>
+                        <option class="calc__option" data-price="100" value="red velvet">Красный бархат</option>
+                        <option class="calc__option" data-price="0" value="cherry">Вишнёвый</option>
+                        <option class="calc__option" data-price="0" value="raspberry">Малиновый</option>
+                        <option class="calc__option" data-price="100" value="snikers">Сникерс</option>
 
                     </select>
 
                     <select name="design"class="calc__select">
                         <option class="calc__option" value="0">Выберите дизайн</option>
-                        <option class="calc__option" data-price="0" value="img">Надпись</option>
-                        <option class="calc__option" data-price="100"  value="colors">Надпись + простой рисунок</option>
-                        <option class="calc__option" data-price="250"  value="colors">Надпись + сложный рисунок</option>
-                        <option class="calc__option" data-price="300"  value="colors">Печать на сахарной бумаге</option>
+                        <option class="calc__option" data-price="0" value="inscription">Надпись</option>
+                        <option class="calc__option" data-price="100"  value="inscription + simple paint">Надпись + простой рисунок</option>
+                        <option class="calc__option" data-price="250"  value="inscription + difficult paint">Надпись + сложный рисунок</option>
+                        <option class="calc__option" data-price="300"  value="print">Печать на сахарной бумаге</option>
 
                         <input name="promo" type="text" class="calc__input" placeholder="Введите промокод">
                 </div>
@@ -314,11 +305,11 @@
 
                     <input  name="phone" type="tel" class="form__input form__phone" placeholder="+7( ___ )___-__-__" >
 
-                    <input class="total-input" name="total" type="text">
+                    <input class="form__input total-input" name="total" type="text">
 
                     <div class="form__check">
 
-                        <label class="form__label" for="checkbox">Использовать данные с калькуялтора</label>
+                        <label class="form__label" for="checkbox">Использовать данные с калькулятора</label>
                         <input class="form__checkbox" type="checkbox" id="checkbox">
                         <label for="checkbox" class="custom-checkbox"></label>
                         
@@ -391,6 +382,8 @@
             </div>
         </div>
     </div>
+
+
 
     <script src="js/bundle.js"></script>
 </body>

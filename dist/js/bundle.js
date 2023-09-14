@@ -23,6 +23,15 @@ questionsText.forEach(text => {
   text.style.height = 0;
 });
 
+window.addEventListener('resize', () => {
+  questionsText.forEach(text => {
+    text.style.height = 'auto';
+    heights.push(parseInt(window.getComputedStyle(text).height));
+    text.style.height = 0;
+  });
+});
+
+
 lines.forEach((line, i) => {
   line.addEventListener('click', (e) => {
       questionsText[i].classList.toggle('questions__text-active');
@@ -88,11 +97,9 @@ const calc = () => {
 
         promo.value === 'IWANTCAKE' ? total.textContent = totalSum * .9 : total.textContent = totalSum;
 
-            document.querySelector('.total-input').value = `${+total.textContent}`;
+        document.querySelector('.total-input').value = `${+total.textContent}`;
+        console.log(document.querySelector('.total-input').value)
  
-
-        // promo.value === 'IWANTCAKE' ? document.querySelector('.total-input').value = `${total.textContent * .9}` : document.querySelector('.total-input').value = `${total.textContent}`;
-
     };
     
         selects.forEach(select => {
@@ -365,6 +372,7 @@ const form = () => {
                 inputs.forEach(input => {
                     input.value = '';
                 });
+                chekbox.checked = false;
             }, 3000)
         });
     });
@@ -386,12 +394,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const hamburger = () => {
     const hamburger = document.querySelector('.hamburger'),
-          menu = document.querySelector('.header__nav');
+          menu = document.querySelector('.header__nav'),
+          overlay = document.querySelector('.overlay'),
+          headerNav = document.querySelector('.header__nav');
+
+    function openMenu() {
+        menu.classList.add('header__nav_active');
+        hamburger.classList.add('hamburger_active');
+        overlay.classList.add('overlay_active');
+        document.documentElement.style.overflow = 'hidden';
+    };
+
+    function closeMenu() {
+        menu.classList.remove('header__nav_active');
+        hamburger.classList.remove('hamburger_active');
+        overlay.classList.remove('overlay_active');
+        document.documentElement.style.overflow = '';
+    };
         
     hamburger.addEventListener('click', () => {
-        menu.classList.toggle('header__nav_active');
-        hamburger.classList.toggle('hamburger_active');
+        hamburger.classList.contains('hamburger_active') ? closeMenu() : openMenu();
     });
+
+    headerNav.addEventListener('click', (e) => {
+        const target = e.target;
+
+        if (target && target.classList.contains('nav__list-link')) {
+            closeMenu();
+        };
+    });
+
+
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (hamburger);
@@ -655,7 +688,7 @@ const validation = (elements, trigger) => {
         };
 
         function checkFull() {
-            for (let i = 0; i < elements.length; i++) {
+            for (let i = 0; i < elements.length - 1; i++) {
                 if (elements[i].value === '') {
                     isInputFull = false;
                     break;

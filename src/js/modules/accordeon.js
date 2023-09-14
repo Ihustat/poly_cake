@@ -9,6 +9,15 @@ questionsText.forEach(text => {
   text.style.height = 0;
 });
 
+window.addEventListener('resize', () => {
+  questionsText.forEach(text => {
+    text.style.height = 'auto';
+    heights.push(parseInt(window.getComputedStyle(text).height));
+    text.style.height = 0;
+  });
+});
+
+
 lines.forEach((line, i) => {
   line.addEventListener('click', (e) => {
       questionsText[i].classList.toggle('questions__text-active');

@@ -19,7 +19,7 @@ const validation = (elements, trigger) => {
         };
 
         function checkFull() {
-            for (let i = 0; i < elements.length; i++) {
+            for (let i = 0; i < elements.length - 1; i++) {
                 if (elements[i].value === '') {
                     isInputFull = false;
                     break;
